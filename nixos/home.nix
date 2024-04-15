@@ -1,5 +1,5 @@
-{ pkgs, ...}: {
-    
+{ pkgs, ... }: {
+
   fonts.fontconfig.enable = true;
 
   xdg.portal = {
@@ -29,12 +29,15 @@
     userSettings = {
       "git.autofetch" = true;
       "explorer.confirmDelete" = false;
-      "terminal.integrated.fontSize" =  12;
-      "terminal.integrated.fontFamily" =  "MesloLGS Nerd Font";
-      "editor.fontFamily" =  "MesloLGS Nerd Font";
+      "terminal.integrated.fontSize" = 12;
+      "terminal.integrated.fontFamily" = "MesloLGS Nerd Font";
+      "editor.fontFamily" = "MesloLGS Nerd Font";
       "editor.fontSize" = 14;
       "editor.formatOnSave" = true;
     };
+    extensions = [
+      pkgs.vscode-extensions.jnoortheen.nix-ide
+    ];
   };
 
   programs.bash = {
@@ -96,9 +99,10 @@
     pkgs.slack
     pkgs.firefox
     pkgs.pavucontrol
+    pkgs.nixpkgs-fmt
 
     # We don't want to install all of nerdfonts in it's entirety
-    (pkgs.nerdfonts.override { fonts = ["Meslo"]; })
+    (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
 
   programs.vim = {
