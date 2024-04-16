@@ -1,21 +1,21 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   hardware.opengl = {
     enable = true;
@@ -39,7 +39,7 @@
     pulse.enable = true;
   };
 
-  networking.hostName = "yeetdesk"; # Define your hostname.
+  networking.hostName = "yeetdesk";
 
   time.timeZone = "US/Pacific";
 
@@ -61,7 +61,6 @@
   };
 
   services.openssh.enable = true;
-  system.stateVersion = "24.05"; # Did you read the comment?
-
+  system.stateVersion = "24.05";
 }
 

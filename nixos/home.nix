@@ -1,57 +1,12 @@
 { pkgs, ... }: {
 
+  imports = [
+    ./modules/desktop
+    ./modules/shells
+    ./modules/vscode
+  ];
+
   fonts.fontconfig.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [
-          "hyprland"
-        ];
-      };
-    };
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-    ];
-  };
-
-  home.shellAliases = {
-    nrb = "sudo nixos-rebuild switch --flake ~/code/personal/dotfiles/nixos";
-  };
-
-  programs.starship = {
-    enable = true;
-  };
-
-  programs.vscode = {
-    enable = true;
-    userSettings = {
-      "git.autofetch" = true;
-      "explorer.confirmDelete" = false;
-      "terminal.integrated.fontSize" = 12;
-      "terminal.integrated.fontFamily" = "MesloLGS Nerd Font";
-      "editor.fontFamily" = "MesloLGS Nerd Font";
-      "editor.fontSize" = 14;
-      "editor.formatOnSave" = true;
-    };
-    extensions = [
-      pkgs.vscode-extensions.jnoortheen.nix-ide
-    ];
-  };
-
-  programs.bash = {
-    enable = true;
-    bashrcExtra = ''
-      #export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain codeartifact-default --domain-owner 939067023032 --region us-east-1 --query authorizationToken --output text`
-    '';
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    systemd.enable = false;
-  };
 
   programs.awscli = {
     enable = true;
@@ -106,7 +61,10 @@
     pkgs.firefox
     pkgs.pavucontrol
     pkgs.nixpkgs-fmt
+    pkgs.discord
+    pkgs.signal-desktop
 
+    pkgs.keyd
     # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
