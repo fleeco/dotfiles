@@ -43,7 +43,6 @@
   programs.bash = {
     enable = true;
     bashrcExtra = ''
-      source /home/flees/.config/op/plugins.sh
       #export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain codeartifact-default --domain-owner 939067023032 --region us-east-1 --query authorizationToken --output text`
     '';
   };
@@ -57,9 +56,16 @@
   programs.awscli = {
     enable = true;
     settings = {
-      "default" = {
+      "revcontent" = {
         region = "us-west-2";
         output = "json";
+      };
+    };
+    credentials = {
+      "revcontent" = {
+        "credential_process" = ''
+          sh -c 'echo "{\"Version\": 1, \"AccessKeyId\": \"$(op read "op://Personal/rc_aws_creds/access key id")\", \"SecretAccessKey\": \"$(op read "op://Personal/rc_aws_creds/secret access key")\"}"'
+        '';
       };
     };
   };
@@ -117,3 +123,4 @@
 
   home.stateVersion = "24.05";
 }
+
