@@ -6,6 +6,8 @@
     ./modules/vscode
   ];
 
+  systemd.user.startServices = true;
+
   fonts.fontconfig.enable = true;
 
   programs.awscli = {
@@ -39,6 +41,7 @@
     pkgs.slack
     pkgs.firefox
 
+    pkgs.btop
     pkgs.discord
     pkgs.signal-desktop
 

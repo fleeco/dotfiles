@@ -1,0 +1,5 @@
+[global]
+width = 400
+follow = keyboard
+origin = top-center
+offset = 0x20
