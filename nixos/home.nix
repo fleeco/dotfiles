@@ -29,6 +29,10 @@
     };
   };
 
+  programs.looking-glass-client = {
+    enable = true;
+  };
+
   programs.ssh = {
     enable = true;
     extraConfig = ''

@@ -3,7 +3,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    systemd.enable = false;
+    systemd.enable = true;
+    systemd.variables = [ "--all" ];
     extraConfig = ''
       monitor=DP-2,3840x1200@120,0x0,1
       monitor=DP-1,5120x1440@240,-640x1200,1
@@ -113,8 +114,12 @@
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
+      windowrule = workspace 9, ^1Password$
+
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       $mainMod = SUPER
+
+      bind = , Print, exec, grimblast copy area
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = $mainMod, Q, exec, $terminal
@@ -167,7 +172,9 @@
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
-      exec-once = 1password
+      exec-once = [workspace 9 silent] 1password
+      exec-once = [workspace 1 silent] alacritty
+      exec-once = [workspace 1 silent] firefox
       exec-once = waybar
     '';
   };
