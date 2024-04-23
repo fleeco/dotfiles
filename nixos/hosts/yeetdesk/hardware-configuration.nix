@@ -15,13 +15,13 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/17bcda91-b593-4c60-bb01-5883c1976676";
+      device = "/dev/disk/by-label/NIXROOT";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/80BA-7880";
+      device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

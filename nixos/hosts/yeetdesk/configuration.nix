@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgslocal, pkgs, ... }:
 
 {
   imports = [
@@ -9,6 +9,9 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgslocal.linuxPackages_latest;
+  boot.extraModulePackages = [ pkgslocal.linuxKernel.packages.linux_6_8.kvmfr ];
+
   boot.kernel.sysctl."max_user_instances" = 8192;
 
   nixpkgs.config.allowUnfree = true;
