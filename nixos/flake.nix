@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    localnixpkgs.url = "/home/flees/code/personal/nixpkgs";
+    nixpkgsfork.url = "github:fleeco/nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -19,7 +19,7 @@
 
   outputs = { nixpkgs, home-manager, nix-vscode-extensions, ... }@inputs:
     let
-      pkgslocal = import inputs.localnixpkgs {
+      pkgslocal = import inputs.nixpkgsfork {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };

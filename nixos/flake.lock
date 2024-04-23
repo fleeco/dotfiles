@@ -54,20 +54,6 @@
         "type": "github"
       }
     },
-    "localnixpkgs": {
-      "locked": {
-        "dirtyRev": "16da38cd4f2760e5390573c198287d3de113e5d3-dirty",
-        "dirtyShortRev": "16da38cd4f27-dirty",
-        "lastModified": 1713828469,
-        "narHash": "sha256-4ZU9D+c5Vd86PoaLPHJgwXxfmjhNSSFKa9LEX0QD8kk=",
-        "type": "git",
-        "url": "file:///home/flees/code/personal/nixpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/flees/code/personal/nixpkgs"
-      }
-    },
     "nix-vscode-extensions": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -106,12 +92,27 @@
         "type": "github"
       }
     },
+    "nixpkgsfork": {
+      "locked": {
+        "lastModified": 1713841712,
+        "narHash": "sha256-cCaeulyvHLPWDMRHIScwjhRFYxstA1ldX/AiNQ7z9tY=",
+        "owner": "fleeco",
+        "repo": "nixpkgs",
+        "rev": "a13462f6bd5a13b316778a4611cee604a7fa9822",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fleeco",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "localnixpkgs": "localnixpkgs",
         "nix-vscode-extensions": "nix-vscode-extensions",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgsfork": "nixpkgsfork"
       }
     },
     "systems": {
