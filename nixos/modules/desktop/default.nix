@@ -12,5 +12,6 @@
     pkgs.wofi
     pkgs.grimblast
     pkgs.wl-clipboard
+    pkgs.nwg-look
   ];
 }

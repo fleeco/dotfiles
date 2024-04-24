@@ -16,10 +16,9 @@ in
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [
-    kvmfr
-  ];
+  boot.extraModulePackages = [ kvmfr config.boot.kernelPackages.rtl88x2bu ];
 
   boot.kernel.sysctl."max_user_instances" = 8192;
 
@@ -40,7 +39,6 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -48,7 +46,6 @@ in
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
 
   programs.steam = {
     enable = true;
@@ -59,7 +56,6 @@ in
   virtualisation.docker.enable = true;
 
   time.timeZone = "US/Pacific";
-
   i18n.defaultLocale = "en_US.UTF-8";
 
   console = {

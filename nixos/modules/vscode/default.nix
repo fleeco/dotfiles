@@ -10,7 +10,7 @@ in
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     userSettings = {
-      "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.colorTheme" = "Catppuccin Machhiato";
       "catppuccin.accentColor" = "pink";
       "git.autofetch" = true;
       "explorer.confirmDelete" = false;

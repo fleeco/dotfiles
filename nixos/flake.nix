@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # nixpkgsfork.url = "github:fleeco/nixpkgs";
-
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
 
     home-manager = {
@@ -20,18 +18,11 @@
   };
 
   outputs = { nixpkgs, home-manager, nix-vscode-extensions, ... }@inputs:
-
-    let
-      pkgslocal = import inputs.nixpkgsfork {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
-    in
     {
       nixosConfigurations. yeetdesk = nixpkgs.lib.nixosSystem {
 
         system = "x86_64-linux";
-        specialArgs = { inherit pkgslocal inputs; };
+        specialArgs = { inherit inputs; };
 
         modules = [
           ./hosts/yeetdesk/configuration.nix
