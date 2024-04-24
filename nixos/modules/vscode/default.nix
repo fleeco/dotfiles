@@ -10,11 +10,10 @@ in
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     userSettings = {
+      "workbench.colorTheme" = "Catppuccin Mocha";
+      "catppuccin.accentColor" = "pink";
       "git.autofetch" = true;
       "explorer.confirmDelete" = false;
-      "terminal.integrated.fontSize" = 12;
-      "terminal.integrated.fontFamily" = "MesloLGS Nerd Font";
-      "editor.fontFamily" = "MesloLGS Nerd Font";
       "editor.fontSize" = 14;
       "editor.formatOnSave" = true;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -22,12 +21,20 @@ in
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
       };
 
+      "editor.semanticHighlighting.enabled" = true;
+      "terminal.integrated.minimumContrastRatio" = 1;
+      "window.titleBarStyle" = "custom";
+      "gopls" = {
+        "ui.semanticTokens" = true;
+      };
     };
 
     extensions = [
       extensions.vscode-marketplace.jnoortheen.nix-ide
       extensions.vscode-marketplace.esbenp.prettier-vscode
       extensions.vscode-marketplace.ms-azuretools.vscode-docker
+      pkgs.catppuccin-vsc
+      extensions.vscode-marketplace.catppuccin.catppuccin-vsc-icons
     ];
   };
 

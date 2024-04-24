@@ -1,16 +1,21 @@
-{ config, lib, pkgslocal, pkgs, ... }:
+{ config, lib, inputs, pkgslocal, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
+  nixpkgs.overlays = [
+    inputs.catppuccin-vsc.overlays.default
+  ];
+
+  programs.dconf.enable = true;
   networking.hostName = "yeetdesk";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgslocal.linuxPackages_latest;
-  boot.extraModulePackages = [ pkgslocal.linuxKernel.packages.linux_6_8.kvmfr ];
+  boot.extraModulePackages = [ pkgslocal.linuxPackages_latest.kvmfr inputs.macbook12-spi-driver ];
 
   boot.kernel.sysctl."max_user_instances" = 8192;
 

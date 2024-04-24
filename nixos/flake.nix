@@ -6,6 +6,8 @@
 
     nixpkgsfork.url = "github:fleeco/nixpkgs";
 
+    catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +20,7 @@
   };
 
   outputs = { nixpkgs, home-manager, nix-vscode-extensions, ... }@inputs:
+
     let
       pkgslocal = import inputs.nixpkgsfork {
         system = "x86_64-linux";
@@ -26,8 +29,9 @@
     in
     {
       nixosConfigurations. yeetdesk = nixpkgs.lib.nixosSystem {
+
         system = "x86_64-linux";
-        specialArgs = { inherit pkgslocal; };
+        specialArgs = { inherit pkgslocal inputs; };
 
         modules = [
           ./hosts/yeetdesk/configuration.nix
