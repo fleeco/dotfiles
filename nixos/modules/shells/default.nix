@@ -6,7 +6,10 @@
   ];
 
   home.shellAliases = {
+
+    vim = "nvim";
     # Rebuilds, and gets rid of all generations except the last 5
+
     nrb = ''echo "Building off of the flake" && \
             cd ~/code/personal/dotfiles && \
             git add . && \

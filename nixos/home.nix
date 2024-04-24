@@ -1,4 +1,4 @@
-{ pkgs, theme, ... }: {
+{ pkgs, lib, theme, ... }: {
 
   imports = [
     ./modules/desktop
@@ -9,17 +9,20 @@
   systemd.user.startServices = true;
   fonts.fontconfig.enable = true;
 
-  catppuccin.flavour = theme;
+  catppuccin = {
+    flavour = lib.toLower theme;
+    accent = "pink";
+  };
 
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+      name = "Catppuccin-${theme}-Compact-Pink-Dark";
       package = pkgs.catppuccin-gtk.override {
         accents = [ "pink" ];
         size = "compact";
         tweaks = [ "rimless" "black" ];
-        variant = "macchiato";
+        variant = lib.toLower theme;
       };
     };
   };
@@ -66,10 +69,6 @@
     # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
-
-  programs.vim = {
-    enable = true;
-  };
 
   programs.neovim = {
     enable = true;

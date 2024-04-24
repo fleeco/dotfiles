@@ -41,7 +41,7 @@
               ];
             };
             home-manager.extraSpecialArgs = {
-              theme = "mocha";
+              theme = "Mocha";
               inherit inputs;
               inherit nix-vscode-extensions;
             };
