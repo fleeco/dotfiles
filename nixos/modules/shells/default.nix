@@ -2,7 +2,7 @@
 
   imports = [
     ./bash.nix
-    ./alacritty.nix
+    ./alacritty
   ];
 
   home.shellAliases = {
@@ -21,5 +21,6 @@
 
   programs.starship = {
     enable = true;
+    catppuccin.enable = true;
   };
 }

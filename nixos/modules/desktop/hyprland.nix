@@ -4,6 +4,7 @@
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
+    catppuccin.enable = true;
     systemd.variables = [ "--all" ];
     extraConfig = ''
       monitor=DP-2,3840x1200@120,0x0,1

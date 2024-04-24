@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, theme, ... }: {
 
   imports = [
     ./modules/desktop
@@ -8,6 +8,8 @@
 
   systemd.user.startServices = true;
   fonts.fontconfig.enable = true;
+
+  catppuccin.flavour = theme;
 
   gtk = {
     enable = true;
@@ -67,6 +69,11 @@
 
   programs.vim = {
     enable = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    catppuccin.enable = true;
   };
 
   programs.git = {

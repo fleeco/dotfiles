@@ -33,7 +33,7 @@ in
       extensions.vscode-marketplace.jnoortheen.nix-ide
       extensions.vscode-marketplace.esbenp.prettier-vscode
       extensions.vscode-marketplace.ms-azuretools.vscode-docker
-      pkgs.catppuccin-vsc
+      extensions.vscode-marketplace.catppuccin.catppuccin-vsc
       extensions.vscode-marketplace.catppuccin.catppuccin-vsc-icons
     ];
   };

@@ -6,6 +6,11 @@
     ./obs.nix
   ];
 
+  programs.tmux = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
   home.packages = [
     pkgs.pavucontrol
     pkgs.dolphin

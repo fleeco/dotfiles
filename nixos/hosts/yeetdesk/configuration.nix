@@ -7,10 +7,6 @@ in
     ./hardware-configuration.nix
   ];
 
-  nixpkgs.overlays = [
-    inputs.catppuccin-vsc.overlays.default
-  ];
-
   programs.dconf.enable = true;
   networking.hostName = "yeetdesk";
 
@@ -18,7 +14,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ kvmfr config.boot.kernelPackages.rtl88x2bu ];
+  boot.extraModulePackages = [ kvmfr ];
 
   boot.kernel.sysctl."max_user_instances" = 8192;
 

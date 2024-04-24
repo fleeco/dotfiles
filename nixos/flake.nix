@@ -4,7 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
+    catppuccin.url = "github:catppuccin/nix";
+    catppuccin-waybar = {
+      url = "github:catppuccin/waybar";
+      flake = false;
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,8 +34,17 @@
           {
             home-manager. useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.flees = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit nix-vscode-extensions; };
+            home-manager.users.flees = {
+              imports = [
+                ./home.nix
+                inputs.catppuccin.homeManagerModules.catppuccin
+              ];
+            };
+            home-manager.extraSpecialArgs = {
+              theme = "mocha";
+              inherit inputs;
+              inherit nix-vscode-extensions;
+            };
           }
         ];
       };
