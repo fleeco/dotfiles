@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixpkgsfork.url = "github:fleeco/nixpkgs";
+    # nixpkgsfork.url = "github:fleeco/nixpkgs";
 
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
 

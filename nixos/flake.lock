@@ -125,28 +125,12 @@
         "type": "github"
       }
     },
-    "nixpkgsfork": {
-      "locked": {
-        "lastModified": 1713841712,
-        "narHash": "sha256-cCaeulyvHLPWDMRHIScwjhRFYxstA1ldX/AiNQ7z9tY=",
-        "owner": "fleeco",
-        "repo": "nixpkgs",
-        "rev": "a13462f6bd5a13b316778a4611cee604a7fa9822",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fleeco",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin-vsc": "catppuccin-vsc",
         "home-manager": "home-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
-        "nixpkgs": "nixpkgs_2",
-        "nixpkgsfork": "nixpkgsfork"
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {

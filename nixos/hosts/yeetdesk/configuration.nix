@@ -1,5 +1,7 @@
-{ config, lib, inputs, pkgslocal, pkgs, ... }:
-
+{ config, lib, inputs, pkgs, ... }:
+let
+  kvmfr = config.boot.kernelPackages.callPackage ../../pkgs/kvmfr { };
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -14,8 +16,10 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgslocal.linuxPackages_latest;
-  boot.extraModulePackages = [ pkgslocal.linuxPackages_latest.kvmfr inputs.macbook12-spi-driver ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = [
+    kvmfr
+  ];
 
   boot.kernel.sysctl."max_user_instances" = 8192;
 
