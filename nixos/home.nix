@@ -1,5 +1,8 @@
-{ pkgs, lib, theme, ... }: {
-
+{ pkgs, lib, theme, ... }:
+let
+  upscale = pkgs.callPackage ./pkgs/upscale { };
+in
+{
   imports = [
     ./modules/desktop
     ./modules/shells
@@ -61,10 +64,11 @@
   home.packages = [
     pkgs.slack
     pkgs.firefox
-
+    pkgs.xdg-utils
     pkgs.btop
     pkgs.discord
     pkgs.signal-desktop
+    upscale
 
     # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })

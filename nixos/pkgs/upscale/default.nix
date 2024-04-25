@@ -1,4 +1,5 @@
 { pkgs ? import <nixpkgs> { } }:
+
 pkgs.stdenv.mkDerivation rec {
   name = "upscaler";
   version = "0.0.1";
@@ -68,20 +69,6 @@ pkgs.stdenv.mkDerivation rec {
     cd src
   '';
 
-  # dontUseCmakeConfigure = true;
-
-  # env = {
-  #   CC = "gcc-9";
-  #   CXX = "g++-9";
-  #   VULKAN_SDK = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
-  # };
-
-  # buildPhase = ''
-  #   mkdir build
-  #   cd build
-  #   cmake ../src
-  #   make
-  # '';
 
   installPhase = ''
     mkdir -p $out/bin $out/bin/models
