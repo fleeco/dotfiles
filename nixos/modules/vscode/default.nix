@@ -20,7 +20,6 @@ in
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
       };
-
       "editor.semanticHighlighting.enabled" = true;
       "terminal.integrated.minimumContrastRatio" = 1;
       "window.titleBarStyle" = "custom";
@@ -35,6 +34,9 @@ in
       extensions.vscode-marketplace.ms-azuretools.vscode-docker
       extensions.vscode-marketplace.catppuccin.catppuccin-vsc
       extensions.vscode-marketplace.catppuccin.catppuccin-vsc-icons
+      pkgs.vscode-extensions.github.copilot
+      pkgs.vscode-extensions.github.copilot-chat
+
     ];
   };
 

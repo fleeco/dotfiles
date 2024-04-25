@@ -15,6 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +24,9 @@
 
   outputs = { nixpkgs, home-manager, nix-vscode-extensions, ... }@inputs:
     {
-      nixosConfigurations. yeetdesk = nixpkgs.lib.nixosSystem {
+      packages.x86_64-linux.upscale = inputs.upscale;
+
+      nixosConfigurations.yeetdesk = nixpkgs.lib.nixosSystem {
 
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
