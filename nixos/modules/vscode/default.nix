@@ -5,7 +5,6 @@ in
 {
   programs.vscode = {
     enable = true;
-    # package = pkgs.vscode.fhs;
     mutableExtensionsDir = false;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
@@ -29,21 +28,20 @@ in
     };
 
     extensions = [
-      extensions.vscode-marketplace.jnoortheen.nix-ide
-      extensions.vscode-marketplace.esbenp.prettier-vscode
-      extensions.vscode-marketplace.ms-azuretools.vscode-docker
-      extensions.vscode-marketplace.catppuccin.catppuccin-vsc
-      extensions.vscode-marketplace.catppuccin.catppuccin-vsc-icons
+      pkgs.catppuccin-vsc
+      pkgs.vscode-marketplace.jnoortheen.nix-ide
+      pkgs.vscode-marketplace.esbenp.prettier-vscode
+      pkgs.vscode-marketplace.ms-azuretools.vscode-docker
+      pkgs.vscode-marketplace.catppuccin.catppuccin-vsc-icons
       pkgs.vscode-extensions.github.copilot
       pkgs.vscode-extensions.github.copilot-chat
-
     ];
   };
 
   programs = {
     direnv = {
       enable = true;
-      enableBashIntegration = true; # see note on other shells below
+      enableBashIntegration = true;
       nix-direnv.enable = true;
     };
   };

@@ -4,17 +4,21 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
+
     catppuccin.url = "github:catppuccin/nix";
+
     catppuccin-waybar = {
       url = "github:catppuccin/waybar";
       flake = false;
     };
 
+    nixgl.url = "github:nix-community/nixGL";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
@@ -23,6 +27,13 @@
   };
 
   outputs = { nixpkgs, home-manager, nix-vscode-extensions, ... }@inputs:
+    let
+      theSpecials = {
+        theme = "Mocha";
+        inherit inputs;
+        inherit nix-vscode-extensions;
+      };
+    in
     {
       packages.x86_64-linux.upscale = inputs.upscale;
 
@@ -41,15 +52,32 @@
               imports = [
                 ./home.nix
                 inputs.catppuccin.homeManagerModules.catppuccin
+                inputs.catppuccin-vsc.overlays.default
               ];
             };
-            home-manager.extraSpecialArgs = {
-              theme = "Mocha";
-              inherit inputs;
-              inherit nix-vscode-extensions;
-            };
+            home-manager.extraSpecialArgs = theSpecials;
           }
         ];
+      };
+
+      homeConfigurations."flees" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          config.allowUnfree = true;
+          config.allowUnfreePredicate = (_: true);
+          overlays = [
+            nix-vscode-extensions.overlays.default
+            inputs.nixgl.overlay
+            inputs.catppuccin-vsc.overlays.default
+          ];
+        };
+
+        modules = [
+          ./hosts/yeetlap/home.nix
+          inputs.catppuccin.homeManagerModules.catppuccin
+        ];
+
+        extraSpecialArgs = theSpecials;
       };
     };
 }
