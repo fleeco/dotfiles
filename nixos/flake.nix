@@ -26,12 +26,10 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nix-vscode-extensions, ... }@inputs:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
     let
       theSpecials = {
-        theme = "Mocha";
-        inherit inputs;
-        inherit nix-vscode-extensions;
+        theme = "Macchiato";
       };
     in
     {
@@ -46,7 +44,7 @@
           ./hosts/yeetdesk/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager. useGlobalPkgs = true;
+            home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.flees = {
               imports = [
@@ -66,7 +64,7 @@
           config.allowUnfree = true;
           config.allowUnfreePredicate = (_: true);
           overlays = [
-            nix-vscode-extensions.overlays.default
+            inputs.nix-vscode-extensions.overlays.default
             inputs.nixgl.overlay
             inputs.catppuccin-vsc.overlays.default
           ];

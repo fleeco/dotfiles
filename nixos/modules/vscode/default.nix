@@ -1,4 +1,4 @@
-{ nix-vscode-extensions, dooted, pkgs, ... }:
+{ nix-vscode-extensions, dooted, pkgs, theme, ... }:
 let
   extensions = nix-vscode-extensions.extensions.x86_64-linux;
 in
@@ -9,8 +9,9 @@ in
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     userSettings = {
-      "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.colorTheme" = "Catppuccin ${theme}";
       "catppuccin.accentColor" = "pink";
+
       "git.autofetch" = true;
       "explorer.confirmDelete" = false;
       "editor.fontSize" = 14;

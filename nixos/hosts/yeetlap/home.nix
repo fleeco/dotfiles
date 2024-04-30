@@ -6,6 +6,7 @@
     ../../modules/shells
     #../../modules/desktop
     ../../modules/vscode
+    ../../modules/nvim
   ];
 
   fonts.fontconfig.enable = true;
@@ -18,25 +19,6 @@
   home.username = "flees";
   home.homeDirectory = "/home/flees";
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      telescope-nvim
-      catppuccin-nvim
-      nvim-treesitter.withAllGrammars
-      undotree
-      vim-fugitive
-      lsp-zero-nvim
-    ];
-    extraLuaConfig = ''
-      require("dooted")
-    '';
-  };
-
   programs.starship = {
     enable = true;
 
@@ -48,11 +30,11 @@
   };
 
   programs.atuin = {
+    enable = true;
     settings = {
       enter_accept = false;
       style = "compact";
     };
-    enable = true;
   };
 
   programs.fish = {

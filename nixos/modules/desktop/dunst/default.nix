@@ -1,8 +1,4 @@
 { pkgs, ... }: {
-  # home.packages = [
-  #   pkgs.dunst
-  # ];
-
   services.dunst = {
     enable = true;
     settings = {
@@ -17,10 +13,4 @@
       };
     };
   };
-
-  # home.file = {
-  #   ".config/dunst/dunstrc" = {
-  #     source = ./dunstrc;
-  #   };
-  # };
 }
