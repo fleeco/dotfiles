@@ -18,11 +18,9 @@
     '';
   };
 
-  # plain files is through 'home.file'.
+  # This lets me add the rest of the lua configs
+  # easily
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
     ".config/nvim/lua" = {
       source = ./config/lua;
       recursive = true;
@@ -32,10 +30,5 @@
       source = ./config/after;
       recursive = true;
     };
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
   };
 }
