@@ -7,7 +7,7 @@
     #../../modules/desktop
     ../../modules/vscode
     ../../modules/nvim
-    # ../../modules/desktop/gtk.nix
+    # ../../modules/deskt;qqqqop/gtk.nix
   ];
 
   fonts.fontconfig.enable = true;
