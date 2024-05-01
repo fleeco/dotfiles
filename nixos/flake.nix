@@ -6,6 +6,8 @@
 
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
 
+    asahi.url = "github:tpwrules/nixos-apple-silicon";
+
     catppuccin.url = "github:catppuccin/nix";
 
     catppuccin-waybar = {
@@ -67,6 +69,7 @@
             inputs.nix-vscode-extensions.overlays.default
             inputs.nixgl.overlay
             inputs.catppuccin-vsc.overlays.default
+            inputs.asahi.overlays.default
           ];
         };
 
