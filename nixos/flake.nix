@@ -13,8 +13,6 @@
       flake = false;
     };
 
-    nixgl.url = "github:nix-community/nixGL";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +22,9 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # This is only required for non nixos installations
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs:

@@ -4,10 +4,8 @@
   imports = [
     ../../modules/desktop/dunst
     ../../modules/shells
-    #../../modules/desktop
     ../../modules/vscode
     ../../modules/nvim
-    # ../../modules/deskt;qqqqop/gtk.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -27,14 +25,6 @@
       kubernetes = {
         disabled = false;
       };
-    };
-  };
-
-  programs.atuin = {
-    enable = true;
-    settings = {
-      enter_accept = false;
-      style = "compact";
     };
   };
 

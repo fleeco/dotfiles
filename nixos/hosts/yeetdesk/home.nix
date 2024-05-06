@@ -51,14 +51,6 @@
     enable = true;
   };
 
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      Host *
-        IdentityAgent "~/.1password/agent.sock"
-    '';
-  };
-
   home.packages = [
     pkgs.slack
     pkgs.firefox
@@ -66,7 +58,7 @@
     pkgs.btop
     pkgs.discord
     pkgs.signal-desktop
-
+    pkgs.nh
     # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
@@ -74,12 +66,6 @@
   programs.neovim = {
     enable = true;
     catppuccin.enable = true;
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "steveflee";
-    userEmail = "steveflee@gmail.com";
   };
 
   home.stateVersion = "24.05";

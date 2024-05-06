@@ -5,10 +5,34 @@
     ./alacritty
   ];
 
-  home.shellAliases = {
+  programs.atuin = {
+    enable = true;
+    settings = {
+      enter_accept = false;
+      style = "compact";
+    };
+  };
 
-    vim = "nvim";
-    # Rebuilds, and gets rid of all generations except the last 5
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        IdentityAgent "~/.1password/agent.sock"
+    '';
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "steveflee";
+    userEmail = "steveflee@gmail.com";
+  };
+
+  programs.starship = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
+  home.shellAliases = {
 
     nrb = ''echo "Building off of the flake" && \
             cd ~/code/personal/dotfiles && \
@@ -20,10 +44,5 @@
             echo "Current generations available:" && \
             sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
     '';
-  };
-
-  programs.starship = {
-    enable = true;
-    catppuccin.enable = true;
   };
 }

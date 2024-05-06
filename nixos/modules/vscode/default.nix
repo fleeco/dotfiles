@@ -1,8 +1,4 @@
-{ nix-vscode-extensions, dooted, pkgs, theme, ... }:
-let
-  extensions = nix-vscode-extensions.extensions.x86_64-linux;
-in
-{
+{ pkgs, theme, ... }: {
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
@@ -50,6 +46,5 @@ in
   home.packages = [
     pkgs.nixpkgs-fmt
     pkgs.kubectl
-    # pkgs.dotnet-sdk_8
   ];
 }
