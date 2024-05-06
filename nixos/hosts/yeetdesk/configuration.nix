@@ -7,6 +7,12 @@ in
     ./hardware-configuration.nix
   ];
 
+  nixpkgs.overlays = [
+    inputs.nix-vscode-extensions.overlays.default
+    inputs.nixgl.overlay
+    inputs.catppuccin-vsc.overlays.default
+  ];
+
   programs.dconf.enable = true;
   networking.hostName = "yeetdesk";
 
@@ -29,6 +35,35 @@ in
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # virtualisation.oci-containers = {
+  #   backend = "docker";
+  #   containers = {
+  #     traefik = {
+  #       autoStart = true;
+  #       image = "traefik:v2.11";
+  #       ports = [ "80:80" "8080:8080" ];
+  #       networks = [
+  #         "dooted"
+  #       ];
+  #       cmd = [
+  #         "--log.level=DEBUG"
+  #         "--api.insecure=true"
+  #         "--providers.docker=true"
+  #         "--providers.docker.exposedbydefault=false"
+  #         "--entrypoints.web.address=:80"
+  #       ];
+  #       volumes = [
+  #         "/var/run/docker.sock:/var/run/docker.sock:ro"
+  #       ];
+  #     };
+  #   };
+  # };
+
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
+  };
+
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
@@ -49,8 +84,6 @@ in
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-
-  virtualisation.docker.enable = true;
 
   time.timeZone = "US/Pacific";
   i18n.defaultLocale = "en_US.UTF-8";

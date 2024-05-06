@@ -6,8 +6,6 @@
 
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
 
-    asahi.url = "github:tpwrules/nixos-apple-silicon";
-
     catppuccin.url = "github:catppuccin/nix";
 
     catppuccin-waybar = {
@@ -32,16 +30,13 @@
     let
       theSpecials = {
         theme = "Macchiato";
+        inherit inputs;
       };
     in
     {
-      packages.x86_64-linux.upscale = inputs.upscale;
-
       nixosConfigurations.yeetdesk = nixpkgs.lib.nixosSystem {
-
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
-
         modules = [
           ./hosts/yeetdesk/configuration.nix
           home-manager.nixosModules.home-manager
@@ -50,9 +45,8 @@
             home-manager.useUserPackages = true;
             home-manager.users.flees = {
               imports = [
-                ./home.nix
+                ./hosts/yeetdesk/home.nix
                 inputs.catppuccin.homeManagerModules.catppuccin
-                inputs.catppuccin-vsc.overlays.default
               ];
             };
             home-manager.extraSpecialArgs = theSpecials;
@@ -69,7 +63,6 @@
             inputs.nix-vscode-extensions.overlays.default
             inputs.nixgl.overlay
             inputs.catppuccin-vsc.overlays.default
-            inputs.asahi.overlays.default
           ];
         };
 

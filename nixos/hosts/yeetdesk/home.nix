@@ -1,12 +1,10 @@
-{ pkgs, lib, theme, ... }:
-let
-  upscale = pkgs.callPackage ./pkgs/upscale { };
-in
-{
+{ pkgs, lib, theme, ... }: {
+
   imports = [
-    ./modules/desktop
-    ./modules/shells
-    ./modules/vscode
+    ../../modules/desktop
+    ../../modules/shells
+    ../../modules/vscode
+    ../../modules/nvim
   ];
 
   systemd.user.startServices = true;
@@ -68,7 +66,6 @@ in
     pkgs.btop
     pkgs.discord
     pkgs.signal-desktop
-    upscale
 
     # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
