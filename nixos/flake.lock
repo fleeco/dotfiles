@@ -97,6 +97,22 @@
         "type": "github"
       }
     },
+    "gitbutler": {
+      "locked": {
+        "lastModified": 1708416769,
+        "narHash": "sha256-XEau3ylGMxTBsY/uqh3Ier1iybKkEe6hKcJN+9oWq/w=",
+        "owner": "hacker1024",
+        "repo": "nixpkgs",
+        "rev": "b1770031c64a5c462fb9afabd0fc04ef8c0e4ba8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hacker1024",
+        "ref": "package/gitbutler",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -210,6 +226,7 @@
         "catppuccin": "catppuccin",
         "catppuccin-vsc": "catppuccin-vsc",
         "catppuccin-waybar": "catppuccin-waybar",
+        "gitbutler": "gitbutler",
         "home-manager": "home-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixgl": "nixgl",

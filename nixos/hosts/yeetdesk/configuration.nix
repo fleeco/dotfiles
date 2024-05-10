@@ -12,7 +12,7 @@ in
     inputs.nixgl.overlay
     inputs.catppuccin-vsc.overlays.default
   ];
-
+  hardware.logitech.wireless.enable = true;
   programs.dconf.enable = true;
   networking.hostName = "yeetdesk";
 

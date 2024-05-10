@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # This is while we are waiting for this PR to be merged
+    # https://github.com/NixOS/nixpkgs/pull/289664
+    gitbutler.url = "github:hacker1024/nixpkgs/package/gitbutler";
+
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
 
     catppuccin.url = "github:catppuccin/nix";
@@ -29,10 +33,18 @@
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
     let
+      gitbutler = import inputs.gitbutler {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = (_: true);
+      };
       theSpecials = {
         theme = "Macchiato";
+        inherit gitbutler;
         inherit inputs;
       };
+
+
     in
     {
       nixosConfigurations.yeetdesk = nixpkgs.lib.nixosSystem {

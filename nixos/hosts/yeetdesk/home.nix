@@ -1,4 +1,4 @@
-{ pkgs, lib, theme, ... }: {
+{ pkgs, lib, theme, gitbutler, ... }: {
 
   imports = [
     ../../modules/desktop
@@ -7,7 +7,7 @@
     ../../modules/nvim
   ];
 
-  systemd.user.startServices = true;
+  systemd. user. startServices = true;
   fonts.fontconfig.enable = true;
 
   catppuccin = {
@@ -53,12 +53,17 @@
 
   home.packages = [
     pkgs.slack
+    pkgs.solaar
     pkgs.firefox
     pkgs.xdg-utils
     pkgs.btop
     pkgs.discord
     pkgs.signal-desktop
+    pkgs.spotify
     pkgs.nh
+    gitbutler.gitbutler-ui
+    gitbutler.gitbutler
+    # gitbutler
     # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
