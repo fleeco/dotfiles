@@ -9,7 +9,6 @@ in
 
   nixpkgs.overlays = [
     inputs.nix-vscode-extensions.overlays.default
-    inputs.nixgl.overlay
     inputs.catppuccin-vsc.overlays.default
   ];
 

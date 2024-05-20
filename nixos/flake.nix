@@ -4,7 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
+
+    asahi-apple-silicone.url = "github:tpwrules/nixos-apple-silicon";
 
     catppuccin.url = "github:catppuccin/nix";
 
@@ -22,9 +26,6 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # This is only required for non nixos installations
-    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
@@ -47,6 +48,32 @@
             home-manager.users.flees = {
               imports = [
                 ./hosts/yeetdesk/home.nix
+                inputs.catppuccin.homeManagerModules.catppuccin
+              ];
+            };
+            home-manager.extraSpecialArgs = theSpecials;
+          }
+        ];
+      };
+
+      nixosConfigurations.yeetlap = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {
+          inherit inputs;
+          pkgs-stable = import inputs.nixpkgs-stable {
+            system = "aarch64-linux";
+            config.allowUnfree = true;
+          };
+        };
+        modules = [
+          ./hosts/yeetlap/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.flees = {
+              imports = [
+                ./hosts/yeetlap/home.nix
                 inputs.catppuccin.homeManagerModules.catppuccin
               ];
             };

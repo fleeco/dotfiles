@@ -7,7 +7,7 @@
     ../../modules/nvim
   ];
 
-  systemd.user.startServices = true;
+  #systemd.user.startServices = true;
   fonts.fontconfig.enable = true;
 
   catppuccin = {

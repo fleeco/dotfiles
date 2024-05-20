@@ -1,13 +1,13 @@
-{ config, pkgs, lib, theme, specialArgs, ... }:
+{ pkgs, lib, theme,  ... }: {
 
-{
   imports = [
-    ../../modules/desktop/dunst
+    ../../modules/desktop
     ../../modules/shells
     ../../modules/vscode
     ../../modules/nvim
   ];
 
+  systemd.user.startServices = true;
   fonts.fontconfig.enable = true;
 
   catppuccin = {
@@ -15,73 +15,53 @@
     accent = "pink";
   };
 
-  home.username = "flees";
-  home.homeDirectory = "/home/flees";
-
-  programs.starship = {
+  gtk = {
     enable = true;
-
-    settings = {
-      kubernetes = {
-        disabled = false;
+    theme = {
+      name = "Catppuccin-${theme}-Compact-Pink-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "pink" ];
+        size = "compact";
+        tweaks = [ "rimless" "black" ];
+        variant = lib.toLower theme;
       };
     };
   };
 
-  programs.fish = {
+  programs.awscli = {
     enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-    '';
-    plugins = [
-      { name = "tide"; src = pkgs.fishPlugins.tide.src; }
-    ];
-  };
 
-  # The identity agent lets me use my ssh keys from 1password easy breezy
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      Host *
-          IdentityAgent ~/.1password/agent.sock
-    '';
-  };
+    settings = {
+      "revcontent" = {
+        region = "us-west-2";
+        output = "json";
+      };
+    };
 
-  programs.git = {
-    enable = true;
-    userName = "Stephen Flee";
-    userEmail = "steveflee@gmail.com";
+    credentials = {
+      "revcontent" = {
+        "credential_process" = ''
+          sh -c 'echo "{\"Version\": 1, \"AccessKeyId\": \"$(op read "op://Personal/rc_aws_creds/access key id")\", \"SecretAccessKey\": \"$(op read "op://Personal/rc_aws_creds/secret access key")\"}"'
+        '';
+      };
+    };
   };
-
 
   home.packages = [
-    pkgs.signal-desktop
-    pkgs.waybar
+    pkgs.xdg-utils
+    pkgs.dconf
     pkgs.btop
-    pkgs.pavucontrol
-
-    pkgs.roboto
-    pkgs.nerdfonts
-
-    pkgs.wl-clipboard
-    pkgs.grimblast
-
-    pkgs._1password
-    pkgs._1password-gui
-
-    pkgs.font-awesome
-    pkgs.ytfzf
-
-    # This is used for tide / fish
+    pkgs.signal-desktop
+    pkgs.nh
+    # We don't want to install all of nerdfonts in it's entirety
     (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
 
-  home.sessionVariables = {
-    KUBECONFIG = /home/flees/.kube/config;
+  programs.neovim = {
+    enable = true;
+    catppuccin.enable = true;
   };
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 }
+
