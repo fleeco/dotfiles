@@ -11,6 +11,10 @@ in
     inputs.nix-vscode-extensions.overlays.default
     inputs.nixgl.overlay
     inputs.catppuccin-vsc.overlays.default
+    # Keeping this here just because it's neat
+    # (final: prev: {
+    #   awsvpnclient = inputs.awsvpnclient.packages.x86_64-linux.awsvpnclient;
+    # })
   ];
   hardware.logitech.wireless.enable = true;
   programs.dconf.enable = true;
@@ -19,10 +23,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [ kvmfr ];
-
-  boot.kernel.sysctl."max_user_instances" = 8192;
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -68,7 +70,7 @@ in
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   security.rtkit.enable = true;
@@ -79,6 +81,7 @@ in
     pulse.enable = true;
   };
 
+  environment.systemPackages = [ pkgs.spotify ];
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

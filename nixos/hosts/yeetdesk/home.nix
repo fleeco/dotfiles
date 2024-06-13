@@ -11,7 +11,7 @@
   fonts.fontconfig.enable = true;
 
   catppuccin = {
-    flavour = lib.toLower theme;
+    #flavour = lib.toLower theme;
     accent = "pink";
   };
 
@@ -58,6 +58,7 @@
     pkgs.xdg-utils
     pkgs.btop
     pkgs.discord
+    pkgs.zoom-us
     pkgs.signal-desktop
     pkgs.spotify
     pkgs.nh

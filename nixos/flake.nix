@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixpkgsmain.url = "github:NixOS/nixpkgs";
+
     # This is while we are waiting for this PR to be merged
     # https://github.com/NixOS/nixpkgs/pull/289664
     gitbutler.url = "github:hacker1024/nixpkgs/package/gitbutler";
@@ -33,6 +35,12 @@
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
     let
+      nixpkgsmain = import inputs.nixpkgsmain {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = (_: true);
+      };
+
       gitbutler = import inputs.gitbutler {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -42,6 +50,7 @@
         theme = "Macchiato";
         inherit gitbutler;
         inherit inputs;
+        inherit nixpkgsmain;
       };
 
 
