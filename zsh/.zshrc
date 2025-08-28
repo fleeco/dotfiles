@@ -15,9 +15,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias gobench="find $(git rev-parse --show-toplevel) -name '*.go' | entr go test -bench=. -run=^$ -benchmem . -cpu 1 -count 5"
-alias gotest="find $(git rev-parse --show-toplevel) -name '*.go' | entr go test -v ."
-
+alias gobench='find $(git rev-parse --show-toplevel) -name "*.go" | entr go test -bench=. -run=^$ -benchmem . -cp'
+alias gotest='find $(git rev-parse --show-toplevel) -name "*.go" | entr go test -v .'   
 # Load starship
 eval "$(starship init zsh)"
 # Prompt Engineering Starship
