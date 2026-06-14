@@ -7,6 +7,11 @@ zstyle :compinstall filename '/home/devuser/.zshrc'
 autoload -Uz compinit
 compinit
 
+# Activate mise early so its shims (starship, zoxide, go, node...) are on PATH
+# before anything below tries to init them. mise reads .nvmrc/.node-version/
+# .tool-versions/mise.toml and switches on chpwd natively (replaces old nvm block).
+eval "$(mise activate zsh)"
+
 # Sets up some autocompletion
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -39,32 +44,4 @@ source <(fzf --zsh)
 aql() {
     docker run --rm --network verstappen_default aerospike/aerospike-tools aql --host aerospike-1 -o json -c "$*"
 }
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm, without auto-using the default version
-
-
-if command -v nvm &> /dev/null; then
-    # place this after nvm initialization!
-    autoload -U add-zsh-hook
-    load-nvmrc() {
-      local nvmrc_path
-      nvmrc_path="$(nvm_find_nvmrc)"
-
-      if [ -n "$nvmrc_path" ]; then
-        local nvmrc_node_version
-        nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-        if [ "$nvmrc_node_version" = "N/A" ]; then
-          nvm install
-        elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
-          nvm use
-        fi
-      elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
-        echo "Reverting to nvm default version"
-        nvm use default
-      fi
-    }
-
-    add-zsh-hook chpwd load-nvmrc
-    load-nvmrc
-fi
+# (Node/Go/etc. version management handled by `mise activate` near the top.)
