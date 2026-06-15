@@ -3,6 +3,9 @@ HISTSIZE=10000
 SAVEHIST=10000
 # bindkey -v
 zstyle :compinstall filename '/home/devuser/.zshrc'
+# (Node/Go/etc. version management handled by `mise activate` near the top.)
+eval "$(~/.local/bin/mise activate zsh)"
+source ~/.zshenv
 
 autoload -Uz compinit
 compinit
@@ -10,7 +13,6 @@ compinit
 # Activate mise early so its shims (starship, zoxide, go, node...) are on PATH
 # before anything below tries to init them. mise reads .nvmrc/.node-version/
 # .tool-versions/mise.toml and switches on chpwd natively (replaces old nvm block).
-eval "$(mise activate zsh)"
 
 # Sets up some autocompletion
 zstyle ':completion:*' menu select
@@ -44,4 +46,3 @@ source <(fzf --zsh)
 aql() {
     docker run --rm --network verstappen_default aerospike/aerospike-tools aql --host aerospike-1 -o json -c "$*"
 }
-# (Node/Go/etc. version management handled by `mise activate` near the top.)
