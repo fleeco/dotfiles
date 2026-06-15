@@ -1,0 +1,14 @@
+[Unit]
+Description=Pin amdgpu GPU DPM to 'high' in the performance power profile (gfx1151 hang mitigation)
+Documentation=https://community.frame.work/t/strix-halo-gfx1151-gfx-ring-timeout-under-mundane-gl-load/82310
+After=tuned-ppd.service power-profiles-daemon.service dbus.service
+Wants=dbus.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/gpu-dpm-by-profile.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
